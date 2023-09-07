@@ -81,7 +81,7 @@ class Currency:
             case "fr":
                 return self.init_val / 6.1059379
             case "usd":
-                return self.init_val * 0.93084
+                return self.init_val 
             case "gbp":
                 return self.init_val * 1.25539
             case "mxn":
