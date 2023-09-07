@@ -36,7 +36,6 @@ class Currency:
                 self.init_val = self.dict_units[unit]
                 self.init_unit = unit
 
- 
     @property
     def eur(self):
 
@@ -54,13 +53,12 @@ class Currency:
             case "jpy":
                 return self.init_val * 0.006325293888
 
-
     @property
     def fr(self):
 
          match self.init_unit:
             case "eur":
-                return self.init_val  / 6.55957
+                return self.init_val / 6.55957
             case "fr":
                 return self.init.val
             case "usd":
@@ -75,13 +73,13 @@ class Currency:
     @property
     def usd(self):
 
-         match self.init_unit:
+        match self.init_unit:
             case "eur":
                 return self.init_val / 0.93084
             case "fr":
                 return self.init_val / 6.1059379
             case "usd":
-                return self.init_val 
+                return self.init_val
             case "gbp":
                 return self.init_val * 1.25539
             case "mxn":
@@ -92,7 +90,7 @@ class Currency:
     @property
     def gbp(self):
 
-         match self.init_unit:
+        match self.init_unit:
             case "eur":
                 return self.init_val / 1.1697
             case "fr":
@@ -109,7 +107,7 @@ class Currency:
     @property
     def mxn(self):
 
-         match self.init_unit:
+        match self.init_unit:
             case "eur":
                 return self.init_val * 18.84976302
             case "fr":
@@ -126,7 +124,7 @@ class Currency:
     @property
     def jpy(self):
 
-         match self.init_unit:
+        match self.init_unit:
             case "eur":
                 return self.init_val / 0.006325293888
             case "fr":
@@ -139,7 +137,7 @@ class Currency:
                 return self.init_val / 0.1195615647
             case "jpy":
                 return self.init_val
-            
+
 
 class Slope:
 
