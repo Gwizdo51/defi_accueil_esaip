@@ -36,7 +36,6 @@ class Currency:
                 self.init_val = self.dict_units[unit]
                 self.init_unit = unit
 
- 
     @property
     def eur(self):
 
@@ -54,13 +53,12 @@ class Currency:
             case "jpy":
                 return self.init_val * 0.006325293888
 
-
     @property
     def fr(self):
 
         match self.init_unit:
             case "eur":
-                return self.init_val  * 6.55957
+                return self.init_val * 6.55957
             case "fr":
                 return self.init.val
             case "usd":
@@ -81,7 +79,7 @@ class Currency:
             case "fr":
                 return self.init_val / 6.1059379
             case "usd":
-                return self.init_val 
+                return self.init_val
             case "gbp":
                 return self.init_val * 1.25539
             case "mxn":
@@ -139,7 +137,7 @@ class Currency:
                 return self.init_val / 0.1195615647
             case "jpy":
                 return self.init_val
-            
+
 
 class Slope:
 
@@ -213,7 +211,6 @@ def convert(value: float, unit_start: str, unit_end: str) -> float:
 
     # my_unit= Distance(km=value)
     measure_obj = dict_unit[unit_start]
-
     # round the result to 2 decimals
     # return round(measure_obj.__getattribute__(unit_end), 2)
     result = measure_obj.__getattribute__(unit_end)
