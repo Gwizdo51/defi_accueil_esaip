@@ -43,7 +43,7 @@ class Currency:
             case "eur":
                 return self.init_val
             case "fr":
-                return self.init_val * 6.55957
+                return self.init_val / 6.55957
             case "usd":
                 return self.init_val * 0.93084
             case "gbp":
@@ -56,9 +56,9 @@ class Currency:
     @property
     def fr(self):
 
-         match self.init_unit:
+        match self.init_unit:
             case "eur":
-                return self.init_val / 6.55957
+                return self.init_val * 6.55957
             case "fr":
                 return self.init.val
             case "usd":
@@ -166,6 +166,24 @@ class Slope:
             return (180 / math.pi) * math.atan(self.init_val / 100)
         elif self.init_unit == "angle":
             return self.init_val
+        
+class SpeakerPlacement:
+
+    def __init__(self, viewer_to_wall_distance: float):
+
+        self.dict_units = {
+            "viewer_to_wall_distance": viewer_to_wall_distance
+        }
+
+        for unit in self.dict_units.keys():
+            if self.dict_units[unit] is not None:
+                self.init_val = self.dict_units[unit]
+                self.init_unit = unit
+                
+    
+    @property
+    def speaker_distance(self):
+        return (self.init_val*math.tan(25*math.pi/180), self.init_val/math.cos(25*math.pi/180))
 
 
 def convert(value: float, unit_start: str, unit_end: str) -> float:
@@ -187,8 +205,26 @@ def convert(value: float, unit_start: str, unit_end: str) -> float:
         "gbp": Currency(gbp=value),
         "mxn": Currency(mxn=value),
         "rate": Slope(rate=value),
-        "angle": Slope(angle=value)
+        "angle": Slope(angle=value),
+        "viewer_to_wall_distance": SpeakerPlacement(viewer_to_wall_distance=value)
     }
 
+    # my_unit= Distance(km=value)
     measure_obj = dict_unit[unit_start]
-    return measure_obj.__getattribute__(unit_end)
+    # round the result to 2 decimals
+    # return round(measure_obj.__getattribute__(unit_end), 2)
+    result = measure_obj.__getattribute__(unit_end)
+    if type(result) is float:
+        return round(result, 2)
+    elif type(result) is tuple:
+        result = list(result)
+        rounded_result = []
+        for item in result:
+            rounded_result.append(round(item, 2))
+        return tuple(rounded_result)
+    else:
+        raise RuntimeError("should never be raised")
+
+# convert(34,"eur","eur")
+# convert(34,"eur","jpy")
+convert(3, "viewer_to_wall_distance", "speaker_distance")
